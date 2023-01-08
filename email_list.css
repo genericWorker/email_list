@@ -9,6 +9,9 @@ body {
 h1 {
     color: rgb(0, 238, 255);
 }
+h4 {
+    color: red
+}
 div {
     margin-bottom: 1em;
 }
