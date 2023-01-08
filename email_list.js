@@ -4,8 +4,8 @@ const $ = selector => document.querySelector(selector);
 
 const joinList = () => {
     // get user entries from text boxes
-    const email1 = $("#email_1").value;
-    const email2 = $("#email_2").value;
+    const email1 = $("#email_address1").value;
+    const email2 = $("#email_address2").value;
     const firstName = $("#first_name").value;
      
     // check user entries
@@ -39,8 +39,8 @@ const joinList = () => {
 
 const clearForm = () => {
     // clear text boxes
-    $("#email_1").value = "";
-    $("#email_2").value = "";
+    $("#email_address1").value = "";
+    $("#email_address2").value = "";
     $("#first_name").value = "";
 
     // clear span elements
@@ -49,7 +49,7 @@ const clearForm = () => {
     $("#first_name_error").textContent = "*"; 
 
     // set focus on first text box after resetting the form
-    $("#email_1").focus();
+    $("#email_address1").focus();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -58,5 +58,5 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#clear_form").addEventListener("click", clearForm);
 
     // set focus on first text box after the form loads
-    $("#email_1").focus();
+    $("#emailaddress_1").focus();
 });
