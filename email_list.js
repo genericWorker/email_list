@@ -1,62 +1,40 @@
-"use strict"
+"use strict";
 
-const $ = selector => document.querySelector(selector);
+var $ = function(id) {
+    return document.getElementById(id);
+};
 
-const joinList = () => {
-    // get user entries from text boxes
-    const email1 = $("#email_1").value;
-    const email2 = $("#email_2").value;
-    const firstName = $("#first_name").value;
-     
-    // check user entries
-    let isValid = true;
-    if (email1 == "") { 
-        $("#email_1_error").textContent = "Email is required.";
-        isValid = false;
-    } else { 
-        $("#email_1_error").textContent = ""; 
+var joinList = function() {
+    var emailAddress1 = $("email_address1").value;
+    var emailAddress2 = $("email_address2").value;
+    var firstName = $("first_name").value;
+    var errorMessage = "";
+
+    // validate the entries
+    if (emailAddress1 == "") {
+      errorMessage = "First email address entry required";
+        $("email_address1").focus();
+    } else if (emailAddress2 == "") {
+      errorMessage = "Second email address entry required";
+      $("email_address2").focus();
+    } else if (emailAddress2 != emailAddress1) {
+      errorMessage = "Email address entries must match";
+      $("email_address2").focus();
+    } else if (firstName == "") {
+      errorMessage = "First name entry required";
+      $("first_name").focus();
     }
 
-    if (email1 != email2) { 
-        $("#email_2_error").textContent = "Emails must match.";
-        isValid = false;
-    } else { 
-        $("#email_2_error").textContent = ""; 
-    }
-
-    if (firstName == "") {
-        $("#first_name_error").textContent = "First name is required.";
-        isValid = false;
-    } else { 
-        $("#first_name_error").textContent = ""; 
-    }
-
-    // submit the form if user entries are valid
-    if ( isValid ) {
-        $("#email_form").submit(); 
+    // submit the form if all entries are valid
+    // otherwise, display an error message
+    if (errorMessage == "") {
+        $("email_form").submit(); 
+    } else {
+      alert(errorMessage);
     }
 };
 
-const clearForm = () => {
-    // clear text boxes
-    $("#email_1").value = "";
-    $("#email_2").value = "";
-    $("#first_name").value = "";
-
-    // clear span elements
-    $("#email_1_error").textContent = "*";
-    $("#email_2_error").textContent = "*";
-    $("#first_name_error").textContent = "*"; 
-
-    // set focus on first text box after resetting the form
-    $("#email_1").focus();
+window.onload = function() {
+    $("join_list").onclick = joinList;
+    $("email_address1").focus();
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-    // hook up click events for both buttons
-    $("#join_list").addEventListener("click", joinList);
-    $("#clear_form").addEventListener("click", clearForm);
-
-    // set focus on first text box after the form loads
-    $("#email_1").focus();
-});
